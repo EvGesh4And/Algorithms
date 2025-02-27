@@ -1,21 +1,11 @@
 package main
 
 func middleNode(head *ListNode) *ListNode {
-	if head == nil {
-		return nil
-	}
-	len := 1
-	currentNode := head
+	slow, fast := head, head
 
-	for currentNode.Next != nil {
-		len++
-		currentNode = currentNode.Next
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
 	}
-
-	currentNode = head
-
-	for i := 0; i < len/2; i++ {
-		currentNode = currentNode.Next
-	}
-	return currentNode
+	return slow
 }
