@@ -1,12 +1,13 @@
 package main
 
 func climbStairs(n int) int {
-	a, b := 1, 1
-
-	for i := 2; i <= n; i++ {
-		curr := a + b
-		a, b = b, curr
+	// подъем по лестнице возможен только при n >= 1
+	if n == 1 {
+		return n
 	}
-
-	return b
+	prev2, prev1 := 1, 2
+	for i := 3; i <= n; i++ {
+		prev2, prev1 = prev1, prev2+prev1
+	}
+	return prev1
 }
