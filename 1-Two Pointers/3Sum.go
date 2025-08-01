@@ -6,41 +6,43 @@ import (
 )
 
 func threeSum(nums []int) [][]int {
-	sort.Ints(nums) // O(n log n)
+	sort.Ints(nums)
 	n := len(nums)
 	var res [][]int
 
 	for i := 0; i < n-2; i++ {
-		// Для исключения работы с дубликатами
-		if i != 0 && nums[i] == nums[i-1] {
+		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
+		if nums[i] > 0 {
+			break
+		}
 
-		target := -1 * nums[i]
-		left := i + 1
-		right := n - 1
+		target := -nums[i]
+		left, right := i+1, n-1
 
 		for left < right {
-			curr := nums[left] + nums[right]
-			if curr == target {
+			sum := nums[left] + nums[right]
+			switch {
+			case sum < target:
+				left++
+			case sum > target:
+				right--
+			default:
 				res = append(res, []int{nums[i], nums[left], nums[right]})
 				left++
 				right--
-				// Для исключения работы с дубликатами
+
 				for left < right && nums[left] == nums[left-1] {
 					left++
 				}
-				// Для исключения работы с дубликатами
 				for left < right && nums[right] == nums[right+1] {
 					right--
 				}
-			} else if curr > target {
-				right--
-			} else {
-				left++
 			}
 		}
 	}
+
 	return res
 }
 

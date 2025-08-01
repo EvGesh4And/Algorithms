@@ -1,8 +1,8 @@
 package main
 
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
-	ficHead := &ListNode{}
-	current := ficHead
+	fakeHead := &ListNode{}
+	current := fakeHead
 	for list1 != nil && list2 != nil {
 		if list1.Val < list2.Val {
 			current.Next = list1
@@ -19,5 +19,5 @@ func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 	if list2 != nil {
 		current.Next = list2
 	}
-	return ficHead.Next
+	return fakeHead.Next
 }

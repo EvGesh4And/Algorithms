@@ -17,10 +17,7 @@ func longestSubarray(nums []int) int {
 			}
 			begin++
 		}
-		currWindowSize := end - begin
-		if currWindowSize > maxWindowSize {
-			maxWindowSize = currWindowSize
-		}
+		maxWindowSize = max(maxWindowSize, end-begin+1)
 	}
 
 	return maxWindowSize

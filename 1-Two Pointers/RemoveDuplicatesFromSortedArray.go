@@ -3,19 +3,14 @@ package main
 import "fmt"
 
 func removeDuplicates(nums []int) int {
-	if len(nums) == 0 {
-		return 0
-	}
-
-	curr := 0 // Индекс, куда записываем следующий уникальный элемент
-
-	for i := 1; i < len(nums); i++ {
-		if nums[i] != nums[curr] {
-			curr++
-			nums[curr] = nums[i]
+	left := 0
+	for i := 0; i < len(nums); i++ {
+		if i == 0 || nums[left-1] != nums[i] {
+			nums[left] = nums[i]
+			left++
 		}
 	}
-	return curr + 1
+	return left
 }
 
 func main() {

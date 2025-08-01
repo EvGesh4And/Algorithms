@@ -16,12 +16,7 @@ func longestOnes(nums []int, k int) int {
 			begin++
 		}
 
-		currWindowSize := end - begin + 1
-
-		if maxWindowSize < currWindowSize {
-			maxWindowSize = currWindowSize
-		}
-
+		maxWindowSize = max(maxWindowSize, end-begin+1)
 	}
 
 	return maxWindowSize

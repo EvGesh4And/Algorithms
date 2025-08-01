@@ -5,8 +5,10 @@ import (
 )
 
 func sortedSquares(nums []int) []int {
-	res := make([]int, len(nums))
-	left, right := 0, len(nums)-1
+	n := len(nums)
+	left := 0
+	right := n - 1
+	res := make([]int, n)
 
 	for i := len(nums) - 1; i >= 0; i-- {
 		sqLeft := nums[left] * nums[left]

@@ -36,3 +36,35 @@ func isPalindrome(head *ListNode) bool {
 	}
 	return true
 }
+
+// Тоже самое
+
+func isPalindrome(head *ListNode) bool {
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+
+	head2 := reverse(slow)
+	for head2 != nil {
+		if head.Val != head2.Val {
+			return false
+		}
+		head = head.Next
+		head2 = head2.Next
+	}
+	return true
+}
+
+func reverse(head *ListNode) *ListNode {
+	var prev *ListNode
+	curr := head
+	for curr != nil {
+		next := curr.Next
+		curr.Next = prev
+		prev = curr
+		curr = next
+	}
+	return prev
+}

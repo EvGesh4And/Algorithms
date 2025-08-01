@@ -3,25 +3,21 @@ package main
 import "fmt"
 
 func maxArea(height []int) int {
+	maxV := 0
 	left, right := 0, len(height)-1
-	maxS := 0
-
 	for left < right {
-		h := height[left]
-		if h > height[right] {
-			h = height[right]
+		width := right - left
+		v := min(height[left], height[right]) * width
+		if v > maxV {
+			maxV = v
 		}
-		s := (right - left) * h
-		if s > maxS {
-			maxS = s
-		}
-		if height[left] > height[right] {
-			right--
-		} else {
+		if height[left] <= height[right] {
 			left++
+		} else {
+			right--
 		}
 	}
-	return maxS
+	return maxV
 }
 
 func main() {

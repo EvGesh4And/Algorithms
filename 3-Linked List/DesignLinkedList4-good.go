@@ -14,14 +14,14 @@ func Constructor() MyLinkedList {
 }
 
 func (this *MyLinkedList) Get(index int) int {
-	pos := 0
-	currNode := this.head.next
-	for pos <= index {
-		if currNode != nil {
-			return -1
-		}
+	pos := -1
+	currNode := this.head
+	for pos != index {
 		currNode = currNode.next
 		pos++
+		if currNode == nil {
+			return -1
+		}
 	}
 	return currNode.val
 }
@@ -35,31 +35,31 @@ func (this *MyLinkedList) AddAtTail(val int) {
 	for currNode.next != nil {
 		currNode = currNode.next
 	}
-	currNode.next = &Node{val: val}
+	currNode.next = &Node{val: val, next: nil}
 }
 
 func (this *MyLinkedList) AddAtIndex(index int, val int) {
-	pos := 0
-	currNode := this.head.next
-	for pos < index {
-		if currNode != nil {
-			return
-		}
+	pos := -1
+	currNode := this.head
+	for pos != index-1 {
 		currNode = currNode.next
 		pos++
+		if currNode == nil {
+			return
+		}
 	}
 	currNode.next = &Node{val: val, next: currNode.next}
 }
 
 func (this *MyLinkedList) DeleteAtIndex(index int) {
-	pos := 0
-	currNode := this.head.next
-	for pos < index {
-		if currNode != nil {
-			return
-		}
+	pos := -1
+	currNode := this.head
+	for pos != index-1 {
 		currNode = currNode.next
 		pos++
+		if currNode == nil {
+			return
+		}
 	}
 	if currNode.next != nil {
 		currNode.next = currNode.next.next

@@ -17,7 +17,7 @@ func Constructor(k int, nums []int) KthLargest {
 func (this *KthLargest) Add(val int) int {
 	if len(this.heap) < this.k {
 		this.heap = append(this.heap, val)
-		siftUp(this.heap, len(this.heap)-1)
+		shiftUp(this.heap, len(this.heap)-1)
 	} else if val > this.heap[0] {
 		this.heap[0] = val
 		heapify(this.heap, 0)
@@ -44,7 +44,7 @@ func heapify(arr []int, i int) {
 	}
 }
 
-func siftUp(arr []int, i int) {
+func shiftUp(arr []int, i int) {
 	for i > 0 {
 		parent := (i - 1) / 2
 		if arr[parent] <= arr[i] {

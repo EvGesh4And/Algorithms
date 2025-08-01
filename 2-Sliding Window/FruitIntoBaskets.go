@@ -16,10 +16,7 @@ func totalFruit(fruits []int) int {
 			}
 			begin++
 		}
-		currWindowSize := end - begin + 1
-		if currWindowSize > maxWindowSize {
-			maxWindowSize = currWindowSize
-		}
+		maxWindowSize = max(maxWindowSize, end-begin+1)
 	}
 	return maxWindowSize
 }

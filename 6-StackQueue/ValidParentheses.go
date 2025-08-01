@@ -29,3 +29,21 @@ func isValid(s string) bool {
 
 	return len(stack) == 0
 }
+
+// Как вариант
+func isValid(s string) bool {
+	left := map[rune]struct{}{'(': struct{}{}, '[': struct{}{}, '{': struct{}{}}
+	right := map[rune]rune{']': '[', ')': '(', '}': '{'}
+	var stack []rune
+	for _, r := range s {
+		if _, ok := left[r]; ok {
+			stack = append(stack, r)
+		} else {
+			if len(stack) == 0 || stack[len(stack)-1] != right[r] {
+				return false
+			}
+			stack = stack[:len(stack)-1]
+		}
+	}
+	return len(stack) == 0
+}
