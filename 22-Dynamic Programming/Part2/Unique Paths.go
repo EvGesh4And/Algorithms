@@ -7,23 +7,16 @@ func main() {
 }
 
 func uniquePaths(m int, n int) int {
-	matrix := make([][]int, m)
-	for i := range matrix {
-		matrix[i] = make([]int, n)
+	dp := make([]int, n)
+
+	for j := range n {
+		dp[j] = 1
 	}
 
-	matrix[0][0] = 1
-
-	for i, line := range matrix {
-		for j, _ := range line {
-			if j != 0 {
-				line[j] += line[j-1]
-			}
-			if i != 0 {
-				matrix[i][j] += matrix[i-1][j]
-			}
+	for i := 1; i < m; i++ {
+		for j := 1; j < n; j++ {
+			dp[j] += dp[j-1]
 		}
 	}
-
-	return matrix[m-1][n-1]
+	return dp[n-1]
 }
