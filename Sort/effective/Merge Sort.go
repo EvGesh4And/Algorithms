@@ -3,44 +3,36 @@ package main
 import "fmt"
 
 func main() {
-	// Example usage of Merge Sort
+	// Пример использования Merge Sort
 	arr := []int{64, 34, 25, 12, 22, 11, 90}
-	MergeSort(arr)
-	fmt.Println("Sorted array:", arr)
+	sortedArr := MergeSort(arr)
+	fmt.Println("Отсортированный массив:", sortedArr)
 }
 
-func MergeSort(arr []int) {
+func MergeSort(arr []int) []int {
 	n := len(arr)
 	if n < 2 {
-		return
+		return arr
 	}
 	mid := n / 2
-	MergeSort(arr[:mid])
-	MergeSort(arr[mid:])
-	merge(arr, mid)
+	left := MergeSort(arr[:mid])
+	right := MergeSort(arr[mid:])
+	return merge(left, right)
 }
 
-func merge(arr []int, mid int) {
-	left := make([]int, mid)
-	right := make([]int, len(arr)-mid)
-	copy(left, arr[:mid])
-	copy(right, arr[mid:])
-
-	i, j, k := 0, 0, 0
+func merge(left, right []int) []int {
+	result := make([]int, 0, len(left)+len(right))
+	i, j := 0, 0
 	for i < len(left) && j < len(right) {
 		if left[i] < right[j] {
-			arr[k] = left[i]
+			result = append(result, left[i])
 			i++
 		} else {
-			arr[k] = right[j]
+			result = append(result, right[j])
 			j++
 		}
-		k++
-		if i < len(left) {
-			copy(arr[k:], left[i:])
-		}
-		if j < len(right) {
-			copy(arr[k:], right[j:])
-		}
 	}
+	result = append(result, left[i:]...)
+	result = append(result, right[j:]...)
+	return result
 }
