@@ -6,21 +6,29 @@
  *     Right *TreeNode
  * }
  */
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
 func levelOrder(root *TreeNode) [][]int {
 	if root == nil {
 		return nil
 	}
-	var queue []*TreeNode
+
 	var res [][]int
+	var queue []*TreeNode
 	queue = append(queue, root)
-	lvl := 0
 	for len(queue) > 0 {
-		lvlsize := len(queue)
-		res = append(res, []int{})
-		for _ = range lvlsize {
+		lvlSize := len(queue)
+		lvlSlice := make([]int, 0, lvlSize)
+		for _ = range lvlSize {
 			node := queue[0]
 			queue = queue[1:]
-			res[lvl] = append(res[lvl], node.Val)
+			lvlSlice = append(lvlSlice, node.Val)
 			if node.Left != nil {
 				queue = append(queue, node.Left)
 			}
@@ -28,7 +36,7 @@ func levelOrder(root *TreeNode) [][]int {
 				queue = append(queue, node.Right)
 			}
 		}
-		lvl++
+		res = append(res, lvlSlice)
 	}
 	return res
 }
