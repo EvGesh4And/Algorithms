@@ -8,18 +8,19 @@ import (
 func isPalindrome(s string) bool {
 	left, right := 0, len(s)-1
 	for left < right {
-		for left < right && !unicode.IsLetter(rune(s[left])) && !unicode.IsDigit(rune(s[left])) {
+		if !(unicode.IsDigit(rune(s[left])) || unicode.IsLetter(rune(s[left]))) {
 			left++
+			continue
 		}
-		for left < right && !unicode.IsLetter(rune(s[right])) && !unicode.IsDigit(rune(s[right])) {
+		for !(unicode.IsDigit(rune(s[right])) || unicode.IsLetter(rune(s[right]))) {
 			right--
+			continue
 		}
-		if unicode.ToLower(rune(s[left])) == unicode.ToLower(rune(s[right])) {
-			left++
-			right--
-		} else {
+		if unicode.ToLower(rune(s[left])) != unicode.ToLower(rune(s[right])) {
 			return false
 		}
+		left++
+		right--
 	}
 	return true
 }

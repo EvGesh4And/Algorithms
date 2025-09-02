@@ -6,11 +6,8 @@ func maxArea(height []int) int {
 	maxV := 0
 	left, right := 0, len(height)-1
 	for left < right {
-		width := right - left
-		v := min(height[left], height[right]) * width
-		if v > maxV {
-			maxV = v
-		}
+		v := (right - left) * min(height[left], height[right])
+		maxV = max(maxV, v)
 		if height[left] <= height[right] {
 			left++
 		} else {
