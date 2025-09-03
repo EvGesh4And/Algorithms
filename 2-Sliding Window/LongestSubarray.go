@@ -1,24 +1,19 @@
-package main
-
 func longestSubarray(nums []int) int {
-	maxWindowSize := 0
-	windowCountZero := 0
-
-	begin := 0
-	for end := 0; end < len(nums); end++ {
-		if nums[end] == 0 {
-
-			windowCountZero++
+	maxLen := 0
+	zeros := 0
+	left := 0
+	for i := range nums {
+		if nums[i] == 0 {
+			zeros++
 		}
-
-		for windowCountZero > 1 {
-			if nums[begin] == 0 {
-				windowCountZero--
+		for zeros > 1 {
+			if nums[left] == 0 {
+				zeros--
 			}
-			begin++
+			left++
 		}
-		maxWindowSize = max(maxWindowSize, end-begin+1)
+		maxLen = max(maxLen, i-left)
 	}
 
-	return maxWindowSize
+	return maxLen
 }
